@@ -1,4 +1,14 @@
 import React  from "react";
 import ReactDOM from "react-dom";
+import List from "./containers/list";
 
-ReactDOM.render(<h1>Hola Mundo</h1>, document.getElementById('root'));
+// Importando bootswatch
+import "bootswatch/dist/lux/bootstrap.min.css";
+
+const App=()=>
+     <main className="bg-dark"><div className="container"><List/></div>
+</main>
+
+ReactDOM.render(
+    <App/>,
+    document.getElementById('root'));
