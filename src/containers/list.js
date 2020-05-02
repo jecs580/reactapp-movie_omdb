@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Card from "../components/card/card";
-const API = process.env.API;
+const API = 'http://www.omdbapi.com/?i=tt3896198&apikey=a0a6b836';
 class List extends React.Component {
 
   constructor() {
@@ -41,7 +41,7 @@ class List extends React.Component {
       data:data.Search,
       error:'',
       searchTerm:'',
-      loading:true
+      loading:false
     })
     
   }
