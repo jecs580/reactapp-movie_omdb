@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import Card from "../components/card/card";
-
-const API = 'http://www.omdbapi.com/?i=tt3896198&apikey=a0a6b836';
+const API = process.env.API;
 class List extends React.Component {
 
   constructor() {
@@ -10,6 +9,7 @@ class List extends React.Component {
       data: [],
       searchTerm:'',
       error:'',
+      loading:true
     }
   }
   //Se ejecutara en cuanto el componente es mostrado en pantalla
@@ -18,7 +18,8 @@ class List extends React.Component {
     const res = await fetch(`${API}&s=batman`)
     const resJSON = await res.json();
     this.setState({
-      data: resJSON.Search
+      data: resJSON.Search,
+      loading:false
     })
 
   }
@@ -39,11 +40,17 @@ class List extends React.Component {
     this.setState({
       data:data.Search,
       error:'',
-      searchTerm:''
+      searchTerm:'',
+      loading:true
     })
     
   }
   render() {
+    const {data,loading}=this.state;  // Obtenemos los datos de data y loading
+    if(loading){
+      return <h3 className="text-white">Loading...</h3>
+    }
+    else{
     return (
       <Fragment>
         <div className="row">
@@ -60,13 +67,14 @@ class List extends React.Component {
         <div className="row">
           {
             // Las llaves indican que dentro se tiene codigo js.
-            this.state.data.map(movie => {
+            data.map(movie => {
               return <Card movie={movie} key={movie.imdbID} />
             })
           }
         </div>
       </Fragment>
     )
+    }
   }
 }
 
